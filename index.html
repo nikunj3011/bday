@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Happy Birthday</title>
+  <title>Helly — Happy Birthday</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     html,body{height:100%;margin:0;background:#eb8787;font-family:Helvetica,Arial}
@@ -14,7 +14,7 @@
   width: 90%;
   max-width: 960px;
   height: 100%;
-  aspect-ratio: 1.9 / 0.9; /* maintains proper proportions */
+  aspect-ratio: 2.1 / 1.1; /* maintains proper proportions */
   touch-action: none;
 }
 #hud{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -64,7 +64,7 @@
 <body>
   <div id="gameWrap">
     <h2>:)))))))))))</h2>
-    <canvas id="c" width="960" height="400"></canvas>
+    <canvas id="gameCanvas" width="960" height="390"></canvas>
 
     <div id="hud">
       <button id="restart">Restart</button>
@@ -88,7 +88,7 @@
 
 <script>
 (() => {
-  const canvas = document.getElementById('c');
+  const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
 function resizeCanvas() {
@@ -318,7 +318,7 @@ if('ontouchstart' in window){
     // moving platforms update
     movingPlatforms.forEach(p => { p.x = p.ox + Math.sin(timeElapsed * p.speed) * p.range; p.y = p.oy; });
 
-    // move letterGroups slightly (gentle bobbing horizontally) to act as moving platforms
+    // move letterGroups slightly (gentle bobbing horizontally) to act as moving HELLY platforms
     letterGroups.forEach((r,i) => {
       const wobble = Math.sin(timeElapsed * 0.6 + i * 0.4) * 8; // small horizontal shift
       r.x = r.ox + wobble;
