@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Helly — Happy Birthday</title>
+  <title>Happy Birthday</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     html,body{height:100%;margin:0;background:#eb8787;font-family:Helvetica,Arial}
@@ -318,7 +318,7 @@ if('ontouchstart' in window){
     // moving platforms update
     movingPlatforms.forEach(p => { p.x = p.ox + Math.sin(timeElapsed * p.speed) * p.range; p.y = p.oy; });
 
-    // move letterGroups slightly (gentle bobbing horizontally) to act as moving HELLY platforms
+    // move letterGroups slightly (gentle bobbing horizontally) to act as moving platforms
     letterGroups.forEach((r,i) => {
       const wobble = Math.sin(timeElapsed * 0.6 + i * 0.4) * 8; // small horizontal shift
       r.x = r.ox + wobble;
