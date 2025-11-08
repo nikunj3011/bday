@@ -7,15 +7,53 @@
   <style>
     html,body{height:100%;margin:0;background:#eb8787;font-family:Helvetica,Arial}
     #gameWrap{display:flex;flex-direction:column;align-items:center;padding:8px}
-    canvas{background: linear-gradient(#e7fb8e,#bfe9ff);border:4px solid #2b2b2b;border-radius:8px;touch-action:none}
-    #hud{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    canvas {
+  background: linear-gradient(#e7fb8e,#bfe9ff);
+  border: 4px solid #2b2b2b;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 960px;
+  height: 100%;
+  aspect-ratio: 2 / 1; /* maintains proper proportions */
+  touch-action: none;
+}
+#hud{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     button{padding:6px 10px;border-radius:6px;border:1px solid #333;background:#fff;cursor:pointer}
     input[type=file]{display:none}
     #message{font-weight:700;color:#2b2b2b}
 
     /* Mobile virtual buttons */
-    #mobileControls {position:fixed;bottom:20px;left:0;right:0;display:flex;justify-content:space-between;pointer-events:none;}
-    .vbtn {width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.28);border:2px solid #333;pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;color:#333;margin:0 20px;user-select:none;}
+    #mobileControls {
+  position: fixed;
+  bottom: 5vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 15vw;
+  pointer-events: none;
+}
+.vbtn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  border: 2px solid #333;
+  pointer-events: auto;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #222;
+  user-select: none;
+}
+#jumpBtn {
+  position: static;
+  margin-left: auto;
+}
+.vbtn {width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.28);border:2px solid #333;pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;color:#333;margin:0 20px;user-select:none;}
     .vbtn:active {background:rgba(255,255,255,0.6);}
     #jumpBtn {position:fixed;bottom:20px;right:20px;width:90px;height:90px;}
 
@@ -26,7 +64,7 @@
 <body>
   <div id="gameWrap">
     <h2>:)))))))))))</h2>
-    <canvas id="c" width="960" height="480"></canvas>
+    <canvas id="c" width="960" height="400"></canvas>
 
     <div id="hud">
       <button id="restart">Restart</button>
@@ -34,6 +72,8 @@
       <label style="display:flex;align-items:center;gap:6px">Change player sprite: <input id="spriteFile" type="file" accept="image/*"></label>
       <label style="display:flex;align-items:center;gap:6px">Change BG music: <input id="bgMusicFile" type="file" accept="audio/*"></label>
       <div id="message">Touch or use ← → to move, ↑ or Space to jump</div>
+      <button id="fullscreenBtn" style="display:none;">⛶ Fullscreen</button>
+
     </div>
   </div>
 
@@ -51,6 +91,13 @@
   const canvas = document.getElementById('c');
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
   // ------------------ State ------------------
   let keys = {};
@@ -83,7 +130,7 @@
   function makeLetterL(x,y,s){return[{x:x,y:y,width:16*s,height:120*s,ox:x,oy:y},{x:x+16*s,y:y+104*s,width:48*s,height:16*s,ox:x+16*s,oy:y+104*s}];}
   function makeLetterY(x,y,s){return[{x:x,y:y,width:16*s,height:56*s,ox:x,oy:y},{x:x+40*s,y:y,width:16*s,height:56*s,ox:x+40*s,oy:y},{x:x+16*s,y:y+56*s,width:24*s,height:16*s,ox:x+16*s,oy:y+56*s},{x:x+28*s,y:y+72*s,width:16*s,height:48*s,ox:x+28*s,oy:y+72*s}];}
 
-  const startX = 120; const baseY = 250; const scale = 1.6;
+  const startX = 120; const baseY = 180; const scale = 1.6;
   letterGroups.push(...makeLetterH(startX, baseY, scale));
   letterGroups.push(...makeLetterE(startX+120, baseY, scale));
   letterGroups.push(...makeLetterL(startX+240, baseY, scale));
@@ -97,13 +144,13 @@
   // moving platforms (example extra platform)
   const movingPlatforms = [
     {x: 400, y: H-150, width:40, height:14, ox:50, oy:H-150, range:50, speed:0.8, dir:1},
-    {x: 900, y: H-220, width:100, height:14, ox:900, oy:H-220, range:80, speed:1.1, dir:1}
+    {x: 900, y: H-220, width:100, height:14, ox:500, oy:H-250, range:80, speed:1.1, dir:1}
   ];
 
   // enemies
   const enemies = [
     {x: 320, y:H-100-285, w:28, h:28, vx:80, left:300, right:620},
-    {x: 820, y:H-60-258, w:28, h:28, vx:26, left:380, right:560}
+    {x: 820, y:H-60-258, w:28, h:28, vx:66, left:380, right:660}
   ];
 
   // fireworks storage
@@ -115,6 +162,18 @@
   // audio
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   let masterGain = audioCtx.createGain(); masterGain.gain.value = 0.12; masterGain.connect(audioCtx.destination);
+  let winSongBuffer = null;
+
+  // Preload "song.mp3"
+  fetch('song.mp3')
+    .then(res => res.arrayBuffer())
+    .then(buf => audioCtx.decodeAudioData(buf))
+    .then(decoded => {
+      winSongBuffer = decoded;
+      console.log('Win song loaded and ready!');
+    })
+    .catch(err => console.error('Error loading song.mp3:', err));
+
   let bgOscNodes = []; let bgLoopTimeout; let customMusicBuffer=null; let customMusicSource=null;
 
   // default sprite
@@ -136,6 +195,17 @@
   // mobile virtual controls binding
   const mobileControls = document.getElementById('mobileControls');
   if('ontouchstart' in window) mobileControls.style.display = 'flex';
+  if ('ontouchstart' in window) {
+  document.getElementById('hud').style.display = 'none';
+  document.querySelector('h2').style.display = 'none';
+}
+if('ontouchstart' in window){
+  document.getElementById('fullscreenBtn').style.display = 'block';
+  document.getElementById('fullscreenBtn').addEventListener('click', ()=>{
+    if(canvas.requestFullscreen) canvas.requestFullscreen();
+  });
+}
+
   function bindTouch(btnId, keyCode){ const el = document.getElementById(btnId); el.addEventListener('touchstart', e=>{ e.preventDefault(); keys[keyCode]=true; }, {passive:false}); el.addEventListener('touchend', e=>{ e.preventDefault(); keys[keyCode]=false; }, {passive:false}); }
   bindTouch('leftBtn','ArrowLeft'); bindTouch('rightBtn','ArrowRight'); bindTouch('jumpBtn','Space');
 
@@ -170,7 +240,31 @@
     if(bgLoopTimeout){ clearTimeout(bgLoopTimeout); bgLoopTimeout = null; }
     bgOscNodes.forEach(o=>{ try{o.stop();}catch(e){} }); bgOscNodes = [];
   }
-  function playWinSound(){ if(!soundOn) return; const o1 = audioCtx.createOscillator(), o2 = audioCtx.createOscillator(), g1 = audioCtx.createGain(), g2 = audioCtx.createGain(); o1.type='sawtooth'; o2.type='sine'; o1.frequency.value=880; o2.frequency.value=660; g1.gain.value=0.04; g2.gain.value=0.02; o1.connect(g1); o2.connect(g2); g1.connect(masterGain); g2.connect(masterGain); o1.start(); o2.start(); setTimeout(()=>{ o1.stop(); o2.stop(); }, 700); }
+  function playWinSound() {
+  if (!soundOn) return;
+
+  if (winSongBuffer) {
+    // Stop background melody or loops first
+    stopBackgroundMusic();
+
+    // Play the song
+    const source = audioCtx.createBufferSource();
+    source.buffer = winSongBuffer;
+    source.connect(masterGain);
+    source.start();
+  } else {
+    // fallback sound if the song isn't loaded yet
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine';
+    o.frequency.value = 880;
+    g.gain.value = 0.03;
+    o.connect(g);
+    g.connect(masterGain);
+    o.start();
+    o.stop(audioCtx.currentTime + 0.6);
+  }
+}
 
   // -------------- Utilities --------------
   function rectsCollide(a,b){ return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y; }
@@ -356,7 +450,7 @@
     ctx.fillStyle = '#222'; ctx.font = '14px sans-serif'; ctx.fillText('Score: ' + score, 12, 22);
 
     // win overlay
-    if(gameWon){ ctx.save(); ctx.font = 'bold 100px serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#fff'; ctx.fillText('HAPPY BIRTHDAY', startX + 1020 - camX, baseY - 80); ctx.fillText('HELLY 😀', startX + 1020 - camX, baseY + 90); ctx.restore(); if(showCake) drawCake(endX + 90 - camX, 160, 140, 100); }
+    if(gameWon){ ctx.save(); ctx.font = 'bold 80px serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#fff'; ctx.fillText('HAPPY BIRTHDAY', startX + 1020 - camX, baseY - 80); ctx.fillText('HELLY 😀', startX + 1020 - camX, baseY + 90); ctx.restore(); if(showCake) drawCake(endX + 90 - camX, 160, 140, 100); }
   }
 
   // parallax draw helpers
