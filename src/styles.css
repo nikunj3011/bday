@@ -1,0 +1,181 @@
+
+*{box-sizing:border-box}body{margin:0;background:#090910;color:#f3ebef;font-family:'DM Sans',sans-serif;overflow:hidden}canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}canvas:active{cursor:grabbing}main{position:relative;pointer-events:none;height:100svh;padding:32px 44px 23px;display:flex;flex-direction:column}header,footer{display:flex;justify-content:space-between;align-items:center}.brand{font:600 18px 'Space Grotesk';letter-spacing:-.6px}.brand b{color:#ffb6d1;font-size:30px;vertical-align:middle;margin-right:12px}.brand small{font:9px 'DM Sans';letter-spacing:2px;color:#8e839e;margin-left:25px;border-left:1px solid #403448;padding-left:25px}button,a,input{pointer-events:auto}button{cursor:pointer;font:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffb6d1;outline-offset:4px}.icons{display:flex;gap:10px}.icons button{border:1px solid #3b3245;border-radius:50%;width:37px;height:37px;color:#c9bdd5;background:#14121c;font-size:17px}.intro{margin-top:65px}.eyebrow{font-size:9px;letter-spacing:3px;color:#e7aac5}.eyebrow:before{content:'•';margin-right:9px}h1{font:500 clamp(46px,5.5vw,80px)/1.06 'Space Grotesk';letter-spacing:-4px;margin:20px 0}em{color:#ffb6d1;font-family:Georgia;font-weight:400}.intro p{font-size:12px;line-height:1.9;color:#a095ad}.coord{position:absolute;right:44px;top:140px;writing-mode:vertical-rl;letter-spacing:2px;color:#7a7089;font-size:9px}.count{position:absolute;right:44px;bottom:155px;text-align:right}.count strong{font:38px 'Space Grotesk';letter-spacing:-2px}.count span{display:block;font-size:9px;letter-spacing:2px;color:#93849e;margin-top:4px}.bottom{margin-top:auto}.hint{text-align:center;font-size:10px;color:#ac9db8;margin-bottom:23px}.toolbar{display:flex;align-items:center;gap:22px;width:max-content;max-width:100%;margin:auto;padding:10px 12px 10px 23px;background:#16121ee8;border:1px solid #3d3246;border-radius:17px;backdrop-filter:blur(16px)}.title{font-size:9px;letter-spacing:2px;color:#9d8faa}.modes{background:#09090f;border-radius:9px;padding:4px;display:flex}.modes button{border:0;border-radius:6px;padding:9px 16px;font-size:11px;color:#9a8ba7;background:none}.modes .active{background:#393040;color:#fff0fa}.speed{display:flex;align-items:center;gap:12px;color:#ad9cba;font-size:11px;border-left:1px solid #403148;padding-left:20px}input{width:75px;accent-color:#ffb6d1;height:3px}.add{background:#ffb6d1;color:#332031;border:0;border-radius:10px;font-size:12px;font-weight:600;padding:14px 22px}.add:hover{background:#ffd4e5}.add b{font-size:18px;font-weight:400;margin-right:9px}.add small{color:#93647c;margin-left:12px}footer{margin-top:29px;font-size:8px;letter-spacing:1px;color:#87788e}footer a{color:#ad98bb;text-decoration:none}.live:before{content:'•';color:#bddbb5;margin-right:9px}#toast{position:absolute;top:24%;left:50%;transform:translateX(-50%);background:#231a2ce8;border:1px solid #5f4165;border-radius:25px;padding:12px 20px;font-size:12px;opacity:0;transition:opacity .3s;white-space:nowrap}#toast.show{opacity:1}@media(max-width:650px){main{padding:24px 20px 20px}.brand{font-size:15px}.brand small,.title,.add small,.speed label{display:none}.intro{margin-top:47px}h1{font-size:48px;letter-spacing:-2.5px}.toolbar{padding:9px;gap:10px}.speed{padding-left:8px;gap:0}input{width:43px}.add{padding:13px 11px;font-size:11px}.modes button{padding:9px 11px}.coord{right:20px}.count{right:20px}.hint{font-size:9px}footer{font-size:7px;letter-spacing:.4px}.icons{gap:6px}.icons button{width:32px;height:32px}}
+
+.year-nav{display:flex;gap:4px;padding:4px;border:1px solid #3b3245;border-radius:12px;background:#14121c;pointer-events:auto}.year-nav a{padding:7px 12px;color:#a99ab6;text-decoration:none;font-size:12px;border-radius:8px}.year-nav a[aria-current="page"]{background:#ffb6d1;color:#332031}.header-right{display:flex;align-items:center;gap:20px}.legacy-header{height:80px;padding:16px 30px;background:#090910}.legacy-frame{display:block;border:0;width:100%;height:calc(100svh - 80px);background:#eb8787}.legacy-title{font:500 16px 'Space Grotesk';color:#ffb6d1}@media(max-width:650px){.header-right{gap:8px}.year-nav a{padding:6px 8px}.icons{gap:4px}.icons button{width:28px;height:28px}.brand{font-size:12px}.brand b{margin-right:5px;font-size:23px}.legacy-header{padding:16px 20px}}
+
+:root { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="light"] body { background: #f7f2ed; color: #382c43; }
+.icons button.is-playing { color: #ffb6d1; }
+:root[data-theme="light"] .brand b,
+:root[data-theme="light"] em,
+:root[data-theme="light"] .eyebrow { color: #a43f70; }
+:root[data-theme="light"] .brand small { color: #786681; border-color: #d9cadf; }
+:root[data-theme="light"] .icons button,
+:root[data-theme="light"] .year-nav { background: #fffaf7; border-color: #d9cadf; color: #64516f; }
+:root[data-theme="light"] .icons button.is-playing { color: #a43f70; background: #f9dfeb; }
+:root[data-theme="light"] .intro p,
+:root[data-theme="light"] .hint,
+:root[data-theme="light"] .coord,
+:root[data-theme="light"] .count span,
+:root[data-theme="light"] .title,
+:root[data-theme="light"] footer { color: #75617f; }
+:root[data-theme="light"] .toolbar { background: #fffaf7ed; border-color: #dacbdd; box-shadow: 0 12px 40px #78507c12; }
+:root[data-theme="light"] .modes { background: #eee5ef; }
+:root[data-theme="light"] .modes button,
+:root[data-theme="light"] .year-nav a,
+:root[data-theme="light"] .speed,
+:root[data-theme="light"] footer a { color: #6d517a; }
+:root[data-theme="light"] .modes .active { background: #fffaf7; color: #853860; box-shadow: 0 1px 5px #73577c18; }
+:root[data-theme="light"] .speed { border-color: #dacbdd; }
+:root[data-theme="light"] input { accent-color: #a43f70; }
+:root[data-theme="light"] .add,
+:root[data-theme="light"] .year-nav a[aria-current="page"] { background: #a43f70; color: #fff7fb; }
+:root[data-theme="light"] .add:hover { background: #89345e; }
+:root[data-theme="light"] .add small { color: #f4c8dc; }
+:root[data-theme="light"] .live:before { color: #477549; }
+:root[data-theme="light"] #toast { background: #fffaf7ed; border-color: #ceacc8; color: #69375e; }
+:root[data-theme="light"] :is(button,a,input):focus-visible { outline-color: #a43f70; }
+@media (max-width: 900px) { .brand small { display: none; } }
+@media (max-width: 650px) {
+ .header-right { gap: 5px; }
+ .icons { gap: 3px; }
+ .icons button { width: 26px; height: 28px; font-size: 15px; }
+}
+@media (max-width: 370px) {
+ main > header { flex-wrap: wrap; gap: 12px; }
+ .header-right { width: 100%; justify-content: space-between; }
+ .intro { margin-top: 30px; }
+}
+
+.calorie-score { display:flex; flex-direction:column; text-align:right; gap:3px; min-width:95px; }
+.calorie-score strong { font:500 23px 'Space Grotesk'; color:#ffb6d1; }
+.calorie-score span { font-size:8px; letter-spacing:1px; color:#aa97b5; }
+.snack-companion { position:absolute; left:46px; bottom:140px; width:140px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:5px; }
+.companion-label { font-size:8px; letter-spacing:2px; color:#bda2ca; }
+.snack-companion svg { width:115px; height:145px; overflow:visible; }
+.snack-companion svg g { transition:transform .35s ease; }
+.companion-caption { font-size:10px; line-height:1.5; color:#bda2ca; min-height:30px; }
+.snack-meter { width:80px; height:4px; border-radius:5px; background:#392b45; overflow:hidden; }
+.snack-meter span { display:block; height:100%; background:#ffb6d1; transition:width .3s ease; }
+#toast { max-width:min(510px,90vw); white-space:normal; text-align:center; line-height:1.6; top:25%; }
+.birthday-finale { position:fixed; inset:0; z-index:5; display:grid; place-items:center; background:#0c0718c9; backdrop-filter:blur(9px); pointer-events:auto; padding:20px; }
+.birthday-finale[hidden] { display:none; }
+.birthday-card { text-align:center; position:relative; padding:40px 35px; max-width:600px; border:1px solid #bd89b266; border-radius:30px; background:#25172fe8; box-shadow:0 20px 100px #0005; }
+.birthday-card h2 { font:500 clamp(30px,5vw,64px)/1.12 'Space Grotesk'; letter-spacing:-1.5px; margin:24px 0; }
+.birthday-card p { color:#c4aacc; font-size:13px; line-height:1.8; margin-bottom:25px; }
+.side-confetti { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.side-confetti i { position:absolute; top:-30px; width:9px; height:16px; animation:party-fall 3s ease-in infinite; }
+@keyframes party-fall { from { transform:translateY(-3vh) rotate(0); } to { transform:translateY(110vh) rotate(720deg); } }
+:root[data-theme="light"] .calorie-score strong { color:#a43f70; }
+:root[data-theme="light"] .calorie-score span,
+:root[data-theme="light"] .companion-label,
+:root[data-theme="light"] .companion-caption { color:#75617f; }
+:root[data-theme="light"] .snack-meter { background:#dacbdd; }
+:root[data-theme="light"] .snack-meter span { background:#a43f70; }
+:root[data-theme="light"] .birthday-finale { background:#f7f2edcc; }
+:root[data-theme="light"] .birthday-card { background:#fffaf7f2; border-color:#d8b4cf; box-shadow:0 20px 100px #74447422; }
+:root[data-theme="light"] .birthday-card p { color:#75617f; }
+@media (max-width:950px) { .header-right { gap:10px; }.brand small { display:none; } }
+@media (max-width:700px) {
+ main > header { flex-wrap:wrap; gap:10px; }
+ .header-right { width:100%; justify-content:space-between; }
+ .calorie-score { text-align:left; min-width:75px; }.calorie-score strong { font-size:20px; }.calorie-score span { font-size:7px; }
+ .intro { margin-top:25px; } h1 { font-size:40px; }
+ .snack-companion { left:18px; bottom:135px; width:95px; gap:2px; }
+ .snack-companion svg { width:70px; height:90px; }
+ .companion-caption { font-size:8px; }.companion-label { font-size:7px; }
+ .birthday-card { padding:30px 20px; }
+}
+@media (max-height:650px) { .snack-companion svg { width:65px; height:80px; }.intro p { display:none; }.intro { margin-top:18px; }h1 { font-size:36px; margin:12px 0; } }
+@media (prefers-reduced-motion:reduce) { .side-confetti i { animation:none; top:20%; transform:rotate(30deg); }.snack-companion svg g,.snack-meter span { transition:none; } }
+
+.girl-button { display:flex; flex-direction:column; align-items:center; padding:3px 8px; border:0; border-radius:16px; background:transparent; color:inherit; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+.girl-button:hover { background:#ffb6d112; }
+.girl-button:active svg { transform:rotate(-5deg) scale(.96); }
+.girl-tap-hint { font-size:8px; letter-spacing:1px; color:#d3a5c4; }
+.companion-reply { position:absolute; bottom:calc(100% + 12px); left:0; width:min(230px,calc(100vw - 40px)); padding:13px 15px; border:1px solid #b581b7; border-radius:14px 14px 14px 3px; background:#2c2039f5; color:#ffe2ef; font-size:12px; line-height:1.6; text-align:left; box-shadow:0 8px 25px #0002; z-index:3; }
+.companion-reply:empty { display:none; }
+:root[data-theme="light"] .companion-reply { color:#793458; background:#fffaf7f5; border-color:#b7739b; }
+:root[data-theme="light"] .girl-tap-hint { color:#914269; }
+:root[data-theme="light"] .girl-button:hover { background:#a43f7010; }
+
+.sleeping-helly { margin:0 auto 15px; width:min(320px,100%); color:#e5b7da; }
+.sleeping-helly svg { display:block; width:100%; height:auto; overflow:visible; }
+.sleeping-helly figcaption { font-size:11px; line-height:1.5; color:#d4b5db; margin-top:1px; }
+.birthday-finale { overflow-y:auto; }
+.birthday-card { max-height:calc(100dvh - 40px); overflow-y:auto; padding:28px 35px; }
+.birthday-card h2 { font-size:clamp(28px,4.5vw,51px); margin:18px 0 8px; }
+.birthday-card p { margin:10px 0 18px; }
+.sleep-float { animation:helly-snooze 4s ease-in-out infinite; }
+.sleep-tummy { transform-origin:184px 125px; animation:tummy-breathe 3s ease-in-out infinite; }
+.sleep-z { animation:dream-drift 3s ease-out infinite; }
+.z-two { animation-delay:1s; }
+.z-three { animation-delay:2s; }
+@keyframes helly-snooze { 0%,100% { transform:translateY(1px) rotate(-.5deg); } 50% { transform:translateY(-4px) rotate(.5deg); } }
+@keyframes tummy-breathe { 0%,100% { transform:scale(1); } 50% { transform:scale(1.025,1.07); } }
+@keyframes dream-drift { 0% { opacity:0; transform:translate(0,5px); } 25% { opacity:1; } 100% { opacity:0; transform:translate(12px,-13px); } }
+:root[data-theme="light"] .sleeping-helly { color:#985c92; }
+:root[data-theme="light"] .sleeping-helly figcaption { color:#75617f; }
+.birthday-finale[hidden] .sleep-float,
+.birthday-finale[hidden] .sleep-tummy,
+.birthday-finale[hidden] .sleep-z { animation-play-state:paused; }
+@media (max-height:700px) { .sleeping-helly { width:230px; margin-bottom:10px; }.birthday-card { padding:20px 24px; }.birthday-card h2 { font-size:30px; margin:12px 0 5px; } }
+@media (prefers-reduced-motion:reduce) { .sleep-float,.sleep-tummy,.sleep-z { animation:none; }.sleep-z { opacity:1; } }
+
+.treat-selector { display:flex; padding:3px; gap:3px; border:1px solid #49374f; border-radius:10px; }
+.treat-selector button { border:0; background:transparent; color:#b9a2c5; padding:9px 11px; font-size:11px; border-radius:7px; white-space:nowrap; }
+.treat-selector button[aria-pressed="true"] { background:#64425d; color:#ffe6f1; }
+.toolbar { gap:15px; flex-wrap:wrap; justify-content:center; }
+.dream-bubble { position:relative; border:1px solid #b998d3; border-radius:25px; padding:9px; background:#efe3fa; margin:8px 0 13px; box-shadow:0 0 25px #d7a7ec20; }
+.dream-bubble > svg { border-radius:20px; }
+.dream-label { display:block; font-size:8px; letter-spacing:2px; color:#775080; margin:0 0 6px; }
+.dream-dot { position:absolute; background:#efe3fa; border:1px solid #b998d3; border-radius:50%; }
+.dot-one { width:16px; height:16px; left:36px; bottom:-11px; }
+.dot-two { width:9px; height:9px; left:26px; bottom:-24px; }
+.dream-treat { transform-box:fill-box; transform-origin:center; animation:candy-dream-dance 3s ease-in-out infinite; }
+.treat-two { animation-delay:-1.5s; }
+.dream-tree { transform-box:fill-box; transform-origin:bottom center; animation:dream-tree-sway 4s ease-in-out infinite; }
+.dream-clouds { animation:dream-cloud-drift 7s ease-in-out infinite; }
+@keyframes candy-dream-dance { 0%,100% { transform:translateY(0) rotate(-9deg) scale(.95); } 50% { transform:translateY(-9px) rotate(10deg) scale(1.05); } }
+@keyframes dream-tree-sway { 0%,100% { transform:rotate(-3deg); } 50% { transform:rotate(3deg); } }
+@keyframes dream-cloud-drift { 0%,100% { transform:translateX(-7px); } 50% { transform:translateX(7px); } }
+:root[data-theme="light"] .treat-selector { border-color:#dacbdd; }
+:root[data-theme="light"] .treat-selector button { color:#785380; }
+:root[data-theme="light"] .treat-selector button[aria-pressed="true"] { background:#ead2e1; color:#793458; }
+.birthday-finale[hidden] .dream-treat,.birthday-finale[hidden] .dream-tree,.birthday-finale[hidden] .dream-clouds { animation-play-state:paused; }
+@media(max-width:700px) { .toolbar { max-width:390px; width:100%; gap:8px; padding:8px; }.treat-selector button { padding:7px 8px; font-size:10px; }.toolbar .modes button { padding:8px; }.toolbar .speed { padding-left:5px; }.toolbar .add { padding:10px; }.snack-companion { bottom:175px; }.count { bottom:185px; } }
+@media(prefers-reduced-motion:reduce) { .dream-treat,.dream-tree,.dream-clouds { animation:none; } }
+
+.girl-button.is-eating > svg { animation:helly-happy-bite .65s ease-in-out; }
+@keyframes helly-happy-bite { 0%,100% { transform:scale(1) rotate(0); } 25% { transform:scale(1.09) rotate(-5deg); } 55% { transform:scale(1.05) rotate(5deg); } 80% { transform:scale(1.03) rotate(-2deg); } }
+@media(prefers-reduced-motion:reduce) { .girl-button.is-eating > svg { animation:none; } }
+
+.finale-quote { margin:8px auto 12px; max-width:320px; color:#f0c1df; font-size:12px; font-style:italic; line-height:1.6; }
+:root[data-theme="light"] .finale-quote { color:#914269; }
+
+/* Daytime scenery keeps its foreground readable with either control theme. */
+main[data-world="candy"] { color:#382c43; }
+main[data-world="candy"] :is(.intro p,.coord,.count span,.hint,.companion-label,.companion-caption,footer,.calorie-score span) { color:#66516f; }
+main[data-world="candy"] :is(.brand b,.eyebrow,.intro em,.calorie-score strong,.girl-tap-hint) { color:#963866; }
+main[data-world="candy"] footer a { color:#784680; }
+:root:not([data-theme="light"]) main[data-world="candy"] .birthday-card { color:#f3ebef; }
+:root:not([data-theme="light"]) main[data-world="candy"] .birthday-card .eyebrow { color:#e7aac5; }
+
+#speed-value { min-width:30px; font-size:10px; font-variant-numeric:tabular-nums; color:inherit; }
+main[data-world] .intro h1 {
+  font-family:'DM Sans',sans-serif;
+  font-size:9px;
+  font-weight:500;
+  line-height:1.8;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:10px 0;
+}
+main[data-world] .intro h1 em { font-family:inherit; font-style:normal; font-weight:inherit; }
+/* Keep Candyland's centered commentary white in either theme. */
+main[data-world="candy"] #toast {
+  color:#fff;
+  background:#4a2859eb;
+  border-color:#ce9ed1;
+}
