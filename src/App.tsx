@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { startUniverse, type GameProgress, type GameMode } from './universe';
 import { sitePath, yearFromPath } from './paths';
 import { SleepingHelly } from './SleepingHelly';
+import { LandscapeLayout } from './LandscapeLayout';
 function YearNav({ year }: { year: '2025' | '2026' }) {
   return <nav className="year-nav" aria-label="Birthday year">{(['2025', '2026'] as const).map(y => <a key={y} href={sitePath(y + "/")} aria-current={year === y ? 'page' : undefined}>{y}</a>)}</nav>;
 }
@@ -116,6 +117,6 @@ function SpaceCakes() {
 export default function App() {
  const year = yearFromPath(location.pathname);
  useEffect(() => { document.title = year === '2025' ? 'Helly’s Wonderland · 2025' : 'Helly’s Wonderland · 2026'; }, [year]);
- if (year === '2025') return <><header className="legacy-header"><span className="legacy-title">Helly’s Wonderland · 2025</span><YearNav year="2025" /></header><iframe className="legacy-frame" src={sitePath("2025/original.html")} title="Original 2025 birthday game" allow="autoplay; fullscreen" /></>;
- return <SpaceCakes />;
+ if (year === '2025') return <LandscapeLayout><header className="legacy-header"><span className="legacy-title">Helly’s Wonderland · 2025</span><YearNav year="2025" /></header><iframe className="legacy-frame" src={sitePath("2025/original.html")} title="Original 2025 birthday game" allow="autoplay; fullscreen" /></LandscapeLayout>;
+ return <LandscapeLayout><SpaceCakes /></LandscapeLayout>;
 }

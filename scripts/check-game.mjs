@@ -10,7 +10,7 @@ function element(id) {
 }
 let frame;
 const sandbox = {
- document:{querySelector:element}, window:{addEventListener(){},removeEventListener(){}}, innerWidth:390,innerHeight:844,devicePixelRatio:1,
+ document:{querySelector:element,documentElement:{dataset:{}}}, window:{addEventListener(){},removeEventListener(){}}, innerWidth:390,innerHeight:844,devicePixelRatio:1,
  matchMedia:()=>({matches:false}),performance:{now:()=>0},requestAnimationFrame:fn=>(frame=fn,1),cancelAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},
  Audio:class{pause(){}removeAttribute(){}load(){}},canvas:element('#space'),sitePath:p=>'/'+p,onProgress:p=>progress.push(p),console,
 };
@@ -28,6 +28,11 @@ element('#speed').oninput({target:{value:'0'}});
 assert.equal(element('#speed-value').textContent,'0%');
 assert.ok(element('#toast').textContent.length>0);
 assert.equal(progress.at(-1).remaining,12);
+const beforePortrait=sandbox.inspect().clock;
+sandbox.document.documentElement.dataset.orientationBlocked='true';frame(32);
+assert.equal(sandbox.inspect().clock,beforePortrait,'portrait rotation prompt pauses the game');
+sandbox.document.documentElement.dataset.orientationBlocked='false';frame(48);
+assert.ok(sandbox.inspect().clock>beforePortrait,'landscape resumes without resetting');
 const approach = sandbox.inspect().targets.find(t=>t.c.shy);
 element('#space').onpointermove({clientX:approach.x,clientY:approach.y,pointerType:'mouse'});
 const dodger={c:sandbox.inspect().cakes.find(c=>c.escapeUntil>0)};

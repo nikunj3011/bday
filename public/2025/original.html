@@ -438,7 +438,9 @@
   let last = performance.now();
   let accumulator = 0;
   function loop(now){
-    if(document.hidden) { last=now; accumulator=0; requestAnimationFrame(loop); return; }
+    let portraitBlocked=false;
+    try { portraitBlocked=window.parent.document.documentElement.dataset.orientationBlocked==='true'; } catch {}
+    if(document.hidden || portraitBlocked) { clearInput(); last=now; accumulator=0; requestAnimationFrame(loop); return; }
     accumulator += Math.min(0.1, (now-last)/1000); last=now;
     while(accumulator >= 1/60) { update(1/60); accumulator -= 1/60; }
     draw(); requestAnimationFrame(loop);

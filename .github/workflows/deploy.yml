@@ -28,6 +28,11 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Ensure Pages publishes the compiled workflow site
+        run: node scripts/configure-pages.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PAGES_ADMIN_TOKEN: ${{ secrets.PAGES_ADMIN_TOKEN }}
       - name: Install dependencies
         run: npm ci
       - name: Check cake game

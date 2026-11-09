@@ -179,3 +179,32 @@ main[data-world="candy"] #toast {
   background:#4a2859eb;
   border-color:#ce9ed1;
 }
+
+.game-surface { height:100svh; }
+.rotate-screen { position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:30px; text-align:center; background:radial-gradient(ellipse at 50% 35%,#382044,#0b0915 70%); color:#fff0f7; }
+.rotate-screen h1 { font:500 30px/1.2 'Space Grotesk'; letter-spacing:-1px; margin:0; }
+.rotate-screen p { max-width:300px; font-size:13px; line-height:1.7; color:#d8bfdc; margin:0; }
+.rotate-screen small { font-size:10px; color:#b29abc; }
+.rotate-phone { position:relative; font-size:100px; line-height:1; color:#ffb6d1; transform:rotate(-90deg); }
+.rotate-phone span { position:absolute; top:5px; right:-25px; font-size:40px; }
+.mobile-fullscreen { display:none; }
+@media (any-pointer:coarse) and (orientation:landscape) and (max-height:600px) {
+ .game-surface main { padding:10px max(18px,env(safe-area-inset-right)) 8px max(18px,env(safe-area-inset-left)); }
+ main > header { flex-wrap:nowrap; gap:12px; }
+ .header-right { width:auto; gap:12px; }
+ .brand { font-size:14px; white-space:nowrap; }.brand small { display:none; }
+ .intro { margin-top:9px; }.intro p { display:none; } main[data-world] .intro h1 { margin:4px 0; }
+ .eyebrow { font-size:8px; letter-spacing:2px; }
+ .coord { top:95px; right:20px; font-size:8px; }
+ .toolbar { width:max-content; max-width:100%; flex-wrap:nowrap; gap:10px; padding:7px 10px; }
+ .toolbar .speed label { display:none; }.toolbar .modes button { padding:7px 10px; }.toolbar .add { padding:9px 12px; }
+ .treat-selector button { padding:7px 9px; } .toolbar .speed input { width:65px; }
+ .hint { margin-bottom:7px; font-size:9px; } footer { display:none; }
+ .snack-companion { left:20px; bottom:67px; width:100px; }.snack-companion svg { width:63px; height:80px; }.companion-caption { min-height:0; font-size:8px; }
+ .count { right:22px; bottom:75px; }.count strong { font-size:25px; }.count span { font-size:7px; }
+ #toast { top:22%; padding:8px 16px; font-size:11px; }
+ .legacy-header { height:50px; padding:8px max(20px,env(safe-area-inset-right)) 8px max(20px,env(safe-area-inset-left)); }
+ .legacy-frame { height:calc(100svh - 50px); }
+ .mobile-fullscreen { display:block; position:fixed; bottom:8px; right:max(8px,env(safe-area-inset-right)); z-index:8; width:30px; height:30px; border:1px solid #b28da8; border-radius:8px; background:#2c2039e8; color:#fff0f7; font-size:19px; }
+ .birthday-card { max-height:calc(100dvh - 20px); padding:18px 25px; }
+}

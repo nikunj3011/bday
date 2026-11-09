@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build && node scripts/year-pages.mjs",
+    "build": "tsc -b && vite build && node scripts/year-pages.mjs && node scripts/check-build.mjs",
     "preview": "vite preview --host 0.0.0.0",
-    "test": "node scripts/check-game.mjs"
+    "test": "node scripts/check-game.mjs && node scripts/check-pages.mjs"
   },
   "dependencies": {
     "react": "^19.0.0",

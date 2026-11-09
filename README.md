@@ -29,3 +29,11 @@ Run `npm run build` for a production build and `npm run preview` to preview it. 
 Run `npm test` to check cake popping, temporary cursor escapes, scoring, the birthday finale, mobile reachability, and resets. GitHub Actions runs these checks before publishing.
 
 The 2026 Cakes/Candyland switch starts a fresh round. Clear all treats to see Helly sleeping and dreaming of the selected world: cake castles or lollipop trees and floating candies. Dream animations respect reduced-motion settings.
+
+## If the live site requests /src/main.tsx
+
+GitHub Pages is publishing the source branch rather than the compiled build. In Settings → Pages → Source, select **GitHub Actions** and rerun **Deploy birthday site**. The workflow now checks this setting before deployment and fails with instructions if it is incorrect.
+
+For automatic setup instead, add an optional repository secret named `PAGES_ADMIN_TOKEN`: a fine-grained token restricted to this repository with **Pages: write** and **Administration: write**. The workflow then switches the source to `workflow` automatically, preserving domain settings. The normal `GITHUB_TOKEN` cannot change the Pages source. No admin secret is needed after choosing GitHub Actions manually.
+
+Every build checks that all year entry pages reference existing compiled JavaScript under the deployment base, never raw TypeScript.
