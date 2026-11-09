@@ -35,10 +35,8 @@ export function LandscapeLayout({ children }: { children: ReactNode }) {
     {portrait && <section className="rotate-screen" aria-labelledby="rotate-title">
       <div className="rotate-phone" aria-hidden="true">▯<span>↻</span></div>
       <span className="eyebrow">HELLY’S WONDERLAND</span>
-      <h1 id="rotate-title">A little more room<br />for a lot more fun.</h1>
       <p>{hint}</p>
       <button className="add" onClick={enterLandscape}>Enter landscape ⛶</button>
-      <small>Both birthday games play in landscape.</small>
     </section>}
     {!portrait && <button className="mobile-fullscreen" aria-label={fullscreen ? 'Exit fullscreen' : 'Enter landscape fullscreen'} title={fullscreen ? 'Exit fullscreen' : 'Fullscreen'} onClick={() => {
       if (document.fullscreenElement) void document.exitFullscreen().catch(() => {});
